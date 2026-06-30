@@ -1,0 +1,22 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# AI/ML model files
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# Model and checkpoint folders
+models/
+checkpoints/

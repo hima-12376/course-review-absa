@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Feedback Analyzer</title>
+    <meta name="description" content="AI-powered aspect-based sentiment analysis for course reviews.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Flask Static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Background Glow Effects -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <main class="container">
+
+        <header>
+            <h1>Course Feedback Analyzer</h1>
+            <p>
+                Paste a course review below and instantly extract important aspects
+                along with sentiment insights using DeBERTa + RoBERTa.
+            </p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section glass-panel">
+            <textarea 
+                id="feedbackInput"
+                placeholder="Enter a course review here..."
+                aria-label="Course Feedback Input">
+            </textarea>
+
+            <div class="input-actions">
+                <button id="analyzeBtn" class="primary-btn">
+                    Analyze Feedback
+                </button>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section class="insights-section">
+            <h2>Extracted Insights</h2>
+
+            <!-- Top Dashboard Row -->
+<div class="dashboard-top">
+
+    <!-- 🔵 Macro Sentiment Ring -->
+    <div class="glass-panel dashboard-card">
+        <h3>Overall Sentiment</h3>
+        <canvas id="macroChart"></canvas>
+    </div>
+
+    <!-- 🍩 Aspect Drilldown -->
+    <div class="glass-panel dashboard-card">
+        <h3>Aspect Drilldown</h3>
+        <canvas id="aspectChart"></canvas>
+    </div>
+
+    <!-- 🟣 AI Confidence -->
+    <div class="glass-panel dashboard-card">
+        <h3>Confidence Overview</h3>
+        <div class="confidence-wrapper">
+            <svg width="180" height="180">
+                <circle cx="90" cy="90" r="75"
+                    stroke="rgba(255,255,255,0.1)"
+                    stroke-width="12"
+                    fill="none"/>
+                <circle id="confidenceCircle"
+                    cx="90" cy="90" r="75"
+                    stroke="#7000ff"
+                    stroke-width="12"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-dasharray="471"
+                    stroke-dashoffset="471"
+                    transform="rotate(-90 90 90)"/>
+            </svg>
+            <div id="confidenceText" class="confidence-text">0%</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Existing Bar Chart -->
+<div class="chart-container glass-panel">
+    <canvas id="sentimentChart"></canvas>
+</div>
+
+            <!-- Cards -->
+            <div class="cards-grid" id="insightsGrid">
+                <!-- Cards injected dynamically by script.js -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Flask Static JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
