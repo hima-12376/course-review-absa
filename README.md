@@ -2,51 +2,47 @@
 
 ## Overview
 
-The Course Review Topic and Aspect-Based Sentiment Analyzer is a Natural Language Processing (NLP) application that analyzes student course reviews to identify important course aspects and determine the sentiment associated with each aspect. The system extracts topics such as instructors, assignments, examinations, and syllabus, enabling detailed analysis beyond overall review sentiment.
+The Course Review Topic and Aspect-Based Sentiment Analyzer is a Natural Language Processing (NLP) application that performs Aspect-Based Sentiment Analysis (ABSA) on student course reviews. Instead of predicting only the overall sentiment of a review, the system identifies important course aspects such as instructors, assignments, examinations, and syllabus, and determines the sentiment expressed toward each aspect.
 
-The project combines traditional NLP techniques with transformer-based deep learning models to provide accurate aspect-level sentiment classification through an interactive web application.
+The application combines aspect extraction using spaCy with transformer-based sentiment classification and provides the results through an interactive Flask web interface.
 
 ---
 
 ## Features
 
 - Extracts course-related aspects from student reviews using spaCy.
-- Performs Aspect-Based Sentiment Analysis (ABSA) at the aspect level.
-- Utilizes a hybrid transformer architecture combining DeBERTa and RoBERTa models.
-- Employs ensemble probability fusion for improved sentiment prediction.
+- Performs Aspect-Based Sentiment Analysis (ABSA).
+- Uses transformer-based models (DeBERTa and RoBERTa) for sentiment prediction.
 - Classifies sentiments into Positive, Neutral, and Negative categories.
-- Provides confidence scores for each prediction.
-- Interactive Flask web application for real-time review analysis.
-- Dashboard for visualizing sentiment distribution and analytical insights.
+- Displays confidence scores for each predicted sentiment.
+- Provides an interactive Flask web application for real-time analysis.
+- Exposes a REST API for sentiment prediction.
 
 ---
 
 ## Project Architecture
 
 ```
-Student Reviews
-        │
-        ▼
+Student Course Review
+          │
+          ▼
 Data Preprocessing
-        │
-        ▼
+          │
+          ▼
 Aspect Extraction (spaCy)
-        │
-        ▼
-Hybrid Transformer Models
+          │
+          ▼
+Transformer-Based Sentiment Analysis
 (DeBERTa + RoBERTa)
-        │
-        ▼
-Ensemble Probability Fusion
-        │
-        ▼
+          │
+          ▼
 Sentiment Prediction
-        │
-        ▼
-Flask Web Application
-        │
-        ▼
-Interactive Dashboard
+          │
+          ▼
+Flask Backend
+          │
+          ▼
+Interactive Web Interface
 ```
 
 ---
@@ -57,41 +53,37 @@ Interactive Dashboard
 
 - Python
 
-### NLP & Machine Learning
+### Machine Learning & NLP
 
 - spaCy
 - Hugging Face Transformers
 - DeBERTa
 - RoBERTa
-- Scikit-learn
+- PyTorch
 
-### Web Framework
+### Backend
 
 - Flask
+- Flask-CORS
 
 ### Data Processing
 
 - Pandas
 - NumPy
 
-### Visualization
-
-- Matplotlib
-- Chart.js
-
 ---
 
 ## Dataset
 
-The project uses a dataset containing student course reviews collected from online learning platforms. Reviews are processed to extract meaningful course aspects and their corresponding sentiment.
+The project uses a dataset of student course reviews to perform aspect-level sentiment analysis.
 
-Example aspects include:
+Example aspects extracted include:
 
 - Instructor
 - Assignments
 - Examinations
-- Course Content
 - Syllabus
+- Course Content
 
 ---
 
@@ -109,40 +101,41 @@ Navigate to the project directory:
 cd course-review-absa
 ```
 
-Install the required packages:
+Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+Download the spaCy English language model:
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
+---
+
+## Note
+
+Pretrained transformer model files are **not included** in this repository because they exceed GitHub's file size limit. Before running the application, download or train the required DeBERTa and RoBERTa models and place them in the appropriate project directory.
+
 ---
 
 ## Usage
 
-Run the Flask application:
+Run the Flask server:
 
 ```bash
-python main.py
+python server.py
 ```
 
-Open your browser and visit:
+Open your browser and navigate to:
 
 ```
 http://127.0.0.1:5000
 ```
 
-Enter a course review to analyze the extracted aspects and corresponding sentiment predictions.
-
----
-
-## Results
-
-The system is capable of:
-
-- Extracting multiple aspects from a single review.
-- Predicting aspect-level sentiment using transformer-based models.
-- Displaying confidence scores for each sentiment prediction.
-- Presenting interactive visualizations through a web dashboard.
+Enter a course review, and the system will extract relevant aspects and predict the sentiment for each aspect.
 
 ---
 
@@ -151,29 +144,36 @@ The system is capable of:
 ```
 course-review-absa/
 │
-├── data/
 ├── static/
 ├── templates/
 ├── aspect_extractor.py
 ├── sentiment_model.py
-├── topic_model.py
-├── train_absa.py
-├── train_roberta.py
-├── main.py
+├── server.py
 ├── requirements.txt
-└── README.md
+├── README.md
+└── ...
 ```
+
+---
+
+## Results
+
+The application is capable of:
+
+- Extracting multiple aspects from a single review.
+- Predicting aspect-level sentiment using transformer models.
+- Displaying confidence scores for each detected aspect.
+- Providing real-time sentiment analysis through a web interface.
 
 ---
 
 ## Future Improvements
 
-- Support additional transformer architectures such as BERT and DistilBERT.
-- Deploy the application using Docker and cloud platforms.
-- Integrate multilingual sentiment analysis.
+- Support multilingual course reviews.
 - Improve aspect extraction using dependency parsing.
-- Extend the dashboard with advanced analytics and trend visualization.
-- Enable batch review analysis through file upload functionality.
+- Deploy the application using Docker and cloud platforms.
+- Add batch review analysis through file upload.
+- Integrate advanced analytics and reporting dashboards.
 
 ---
 
@@ -184,5 +184,3 @@ course-review-absa/
 Final Year B.Tech Computer Science Engineering Student
 
 Interested in Artificial Intelligence, Machine Learning, Computer Vision, and Natural Language Processing.
-
----
